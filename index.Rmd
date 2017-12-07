@@ -159,6 +159,16 @@ barData %>%
   
 ```
 
+## Relationship between Payroll and Employment
+From the analysis above, phenomenon that ranks of annual payroll and employment are similar is found. Hypothesis that annual payroll and employment are positive correlated can be come up with. In order to judge the correctness of the hypothesis, annual payroll and emplyment data of 18 states is used to figure out rules between annual payroll and employment. Axix-X shows the number of employment and axix-Y shows the number of annual payroll. Different shapes of points represent data in different state.
+
+```{r, warning=F}
+figure(width=800,height=800) %>% 
+  ly_points(EMP,PAYANN,data=df2,color=GEO_NAME,glyph=GEO_NAME,hover=list(INDUSTRY,EMP,PAYANN)) %>% y_axis(visible=FALSE) %>% x_axis(visible=FALSE)
+```
+
+Result shows that annual payroll and employment in most states are not linear related. So that conclustion can be there is no direct connection between payroll and employment.
+
 ## Payroll of interested industries
 More detailed information about business is needed. Interactive map showed below displays selected industries' payroll among different states.
 
@@ -231,17 +241,6 @@ More detailed information about business is needed. Interactive map showed below
   )%>%
 addMiniMap()
 ```
-
-## Relationship between Payroll and Employment
-From the analysis above, phenomenon that ranks of annual payroll and employment are similar is found. Hypothesis that annual payroll and employment are positive correlated can be come up with. In order to judge the correctness of the hypothesis, annual payroll and emplyment data of 18 states is used to figure out rules between annual payroll and employment. Axix-X shows the number of employment and axix-Y shows the number of annual payroll. Different shapes of points represent data in different state.
-
-```{r, warning=F}
-figure(width=800,height=800) %>% 
-  ly_points(EMP,PAYANN,data=df2,color=GEO_NAME,glyph=GEO_NAME,hover=list(INDUSTRY,EMP,PAYANN)) %>% y_axis(visible=FALSE) %>% x_axis(visible=FALSE)
-```
-
-Result shows that annual payroll and employment in most states are not linear related. So that conclustion can be there is no direct connection between payroll and employment.
-
 
 ## Industries in New York State
 Interesting phenomenan are found when some selected industries data of New York state is displayed. The first histogram displays annual payroll among different industries and the second displays employment among different industries. Some more information can be explored When comparing these two histograms. For some more analysis, please see the 4th point in the part Conclusions.
