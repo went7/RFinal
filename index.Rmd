@@ -172,7 +172,7 @@ figure(width=800,height=800) %>%
 Result shows that annual payroll and employment in most states are not linear related. So that conclustion can be there is no direct connection between payroll and employment.
 
 ## Payroll of interested industries
-More detailed information about business is needed. Interactive map showed below displays selected industries' payroll among different states.
+More detailed information about business is needed. Interactive map showed below displays selected industries' payroll among different states. It is obvious to know that which industries are leading industries of different states.
 
 ```{r, warning=F}
 

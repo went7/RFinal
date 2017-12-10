@@ -699,7 +699,7 @@ barData %&gt;%
 </div>
 <div id="payroll-of-interested-industries" class="section level2">
 <h2>Payroll of interested industries</h2>
-<p>More detailed information about business is needed. Interactive map showed below displays selected industries’ payroll among different states.</p>
+<p>More detailed information about business is needed. Interactive map showed below displays selected industries’ payroll among different states. It is obvious to know that which industries are leading industries of different states.</p>
 <pre class="r"><code>  leaflet(poly) %&gt;% addTiles() %&gt;%
   addPolygons(label=paste(poly$name,&quot; (Agriculture=&quot;,poly$Agriculture,&quot;)&quot;),
               group = &quot;Agriculture&quot;,
