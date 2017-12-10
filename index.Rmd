@@ -127,8 +127,10 @@ highchart() %>%
 Payroll and Employment {.tabset data-width=400}
 -----------------------------------------------------------------------
 
-### Annual Payroll by State
 Two interactive figures showed below are to provides some more detailed knowledge of business scale among states based indexes of annual payroll and employment. The first fugure uses area of polygon to represent the number of annual payroll and the unit is 1000 dollars. The second figure lists states with top 10 employment. It is easy to find that ranks of annual payroll and employment are similar.
+
+### Annual Payroll by State
+
 
 ```{r, fig.keep='none', warning=F}
 
@@ -263,6 +265,7 @@ plot_ly(df2[which(df2$GEO_NAME=='New York'),],type="bar",x=~INDUSTRY,y=~EMP,colo
 
 ## Spatial Autocorrelation of Information Industry
 Information Industry is a special industry which is not limited too much by geographical factors when compared with traditional industries. But it could be more convincing to prove it with real data. Here only data of states in the continent US is anaylzed since only those states are geographical adjacent.<br><br>
+Main goal of the calculation below is to obtain the Moran's I value and p-value which can be analyzed later to figure our whether information industry is spatial autocorrelated.<br><br>
 
 Adjacency is used as criterion to determine which polygons are "near" and to quantify that.
 <br><br>
@@ -303,7 +306,6 @@ yiyj <- g[,1]*g[,2]
 
 pm <- matrix(yiyj,ncol=n)
 pmw <- pm*wm
-head(pmw)
 
 spmw <- sum(pmw)
 spmw
@@ -328,18 +330,18 @@ As the rusult of Moran I is obtained (which equals to -0.133173133), function mo
 moran.test(poly2$Information,ww,randomisation = FALSE,zero.policy = TRUE)
 ```
 
-Verification shows the rusult is correct and p value is obtained simultaneously.
+Verification shows the rusult is correct and p value is obtained simultaneously. Analysis of the result will be conduct in the conclusion part. 
 
 # Conclusions
 Analysze the results above, it is obviously that:<br><br>
-1. Number of firms: 
+1. Number of firms: <br>
   + California, Texas, New York, Florida are on the top 4 on the rank of number of firms<br><br>
-2. Payroll and Employment:
+2. Payroll and Employment: <br>
   + California, Texas, New York, Florida are also the top 4 of the rank of both payroll and employment<br><br>
 3. Relationship between Payroll and Employment: No direct relationship<br><br>
-4. Industries in New York State:
-  + Most industries are on the same level developed
-  + Some industries like accommodation and television broadcasting are with little employment but large payroll
+4. Industries in New York State: <br>
+  + Most industries are on the same level developed <br>
+  + Some industries like accommodation and television broadcasting are with little employment but large payroll <br>
   + In contrast, some industries like agriculture, aircraft manufacturing and book stores are with relatively large emplyment but smaller payroll.<br><br>
 In terms of Moran's theory about spatial autocorrelation, Moran's I > 0 represents positive spatial autocorrelated and Moran's I < 0 represents negative spatial autocorrelated. And when Moran's I is close to zero, it represents value distributes spatial randomly.<br><br>
 As to value p, the treshold value is normally set as 0.05, if p is greater than threshold, the larger the value, the more evidence that the so-called null hypothesis can be approved, which indicates the value is randomly distributed.<br><br>

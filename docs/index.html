@@ -657,9 +657,9 @@ highchart() %&gt;%
 </div>
 <div id="payroll-and-employment" class="section level2 tabset" data-width="400">
 <h2>Payroll and Employment</h2>
+<p>Two interactive figures showed below are to provides some more detailed knowledge of business scale among states based indexes of annual payroll and employment. The first fugure uses area of polygon to represent the number of annual payroll and the unit is 1000 dollars. The second figure lists states with top 10 employment. It is easy to find that ranks of annual payroll and employment are similar.</p>
 <div id="annual-payroll-by-state" class="section level3">
 <h3>Annual Payroll by State</h3>
-<p>Two interactive figures showed below are to provides some more detailed knowledge of business scale among states based indexes of annual payroll and employment. The first fugure uses area of polygon to represent the number of annual payroll and the unit is 1000 dollars. The second figure lists states with top 10 employment. It is easy to find that ranks of annual payroll and employment are similar.</p>
 <pre class="r"><code>tm &lt;- treemap(subset, index = c(&quot;Emp_Size&quot;, &quot;Geo_Des&quot;),
               vSize = &quot;Ann_Pay&quot;, vColor = &quot;Ann_Pay&quot;,
               type = &quot;value&quot;, palette = rev(viridis(6)),title=&quot;2017 Annual Payroll of all firms by state&quot;)
@@ -791,7 +791,7 @@ addMiniMap()</code></pre>
 </div>
 <div id="spatial-autocorrelation-of-information-industry" class="section level2">
 <h2>Spatial Autocorrelation of Information Industry</h2>
-<p>Information Industry is a special industry which is not limited too much by geographical factors when compared with traditional industries. But it could be more convincing to prove it with real data. Here only data of states in the continent US is anaylzed since only those states are geographical adjacent.<br><br></p>
+<p>Information Industry is a special industry which is not limited too much by geographical factors when compared with traditional industries. But it could be more convincing to prove it with real data. Here only data of states in the continent US is anaylzed since only those states are geographical adjacent.<br><br> Main goal of the calculation below is to obtain the Moran’s I value and p-value which can be analyzed later to figure our whether information industry is spatial autocorrelated.<br><br></p>
 <p>Adjacency is used as criterion to determine which polygons are “near” and to quantify that. <br><br> Function poly2nb is used to create the object of “neighbour”.</p>
 <pre class="r"><code>poly2 &lt;- poly[-which(poly$name == &#39;Puerto Rico&#39;|poly$name ==&#39;Alaska&#39;|poly$name ==&#39;Hawaii&#39;),]
 head(data.frame(poly2))</code></pre>
@@ -830,50 +830,8 @@ yiyj &lt;- g[,1]*g[,2]
 
 pm &lt;- matrix(yiyj,ncol=n)
 pmw &lt;- pm*wm
-head(pmw)</code></pre>
-<pre><code>##    [,1]     [,2] [,3]     [,4]     [,5] [,6] [,7] [,8]      [,9]     [,10]
-## 01    0        0    0        0        0    0    0    0 161365953 189918014
-## 04    0        0    0 65182791 55691106    0    0    0         0         0
-## 05    0        0    0        0        0    0    0    0         0         0
-## 06    0 65182791    0        0        0    0    0    0         0         0
-## 08    0 55691106    0        0        0    0    0    0         0         0
-## 09    0        0    0        0        0    0    0    0         0         0
-##    [,11] [,12] [,13] [,14]     [,15] [,16]     [,17] [,18] [,19]     [,20]
-## 01     0     0     0     0         0     0         0     0     0         0
-## 04     0     0     0     0         0     0         0     0     0         0
-## 05     0     0     0     0         0     0 259836290     0     0         0
-## 06     0     0     0     0         0     0         0     0     0         0
-## 08     0     0     0     0 -76096048     0         0     0     0         0
-## 09     0     0     0     0         0     0         0     0     0 -61798683
-##    [,21] [,22]      [,23]     [,24] [,25]      [,26]      [,27] [,28]
-## 01     0     0 -135652133         0     0          0          0     0
-## 04     0     0          0         0     0          0  -64588820     0
-## 05     0     0 -240175122 -66062130     0          0          0     0
-## 06     0     0          0         0     0          0 -399811644     0
-## 08     0     0          0         0     0 -294002221          0     0
-## 09     0     0          0         0     0          0          0     0
-##    [,29]     [,30]    [,31] [,32] [,33] [,34]      [,35]     [,36] [,37]
-## 01     0         0      0.0     0     0     0          0         0     0
-## 04     0  38304287      0.0     0     0     0          0         0     0
-## 05     0         0      0.0     0     0     0  198734375         0     0
-## 06     0         0      0.0     0     0     0          0 -76511051     0
-## 08     0 202580839      0.0     0     0     0 -211109663         0     0
-## 09     0         0 869827.4     0     0     0          0         0     0
-##       [,38] [,39] [,40]    [,41]     [,42]     [,43] [,44] [,45] [,46]
-## 01        0     0     0 14855281         0         0     0     0     0
-## 04        0     0     0        0         0  -3176809     0     0     0
-## 05        0     0     0 26301605 150072565         0     0     0     0
-## 06        0     0     0        0         0         0     0     0     0
-## 08        0     0     0        0         0 -16801268     0     0     0
-## 09 28847538     0     0        0         0         0     0     0     0
-##    [,47] [,48]      [,49]
-## 01     0     0          0
-## 04     0     0          0
-## 05     0     0          0
-## 06     0     0          0
-## 08     0     0 -141706452
-## 09     0     0          0</code></pre>
-<pre class="r"><code>spmw &lt;- sum(pmw)
+
+spmw &lt;- sum(pmw)
 spmw</code></pre>
 <pre><code>## [1] -4525772619</code></pre>
 <pre class="r"><code>smw &lt;- sum(wm)
@@ -913,12 +871,12 @@ print(ww,zero.policy=TRUE)</code></pre>
 ## sample estimates:
 ## Moran I statistic       Expectation          Variance 
 ##      -0.133173133      -0.020833333       0.008107271</code></pre>
-<p>Verification shows the rusult is correct and p value is obtained simultaneously.</p>
+<p>Verification shows the rusult is correct and p value is obtained simultaneously. Analysis of the result will be conduct in the conclusion part.</p>
 </div>
 </div>
 <div id="conclusions" class="section level1">
 <h1>Conclusions</h1>
-<p>Analysze the results above, it is obviously that:<br><br> 1. Number of firms: + California, Texas, New York, Florida are on the top 4 on the rank of number of firms<br><br> 2. Payroll and Employment: + California, Texas, New York, Florida are also the top 4 of the rank of both payroll and employment<br><br> 3. Relationship between Payroll and Employment: No direct relationship<br><br> 4. Industries in New York State: + Most industries are on the same level developed + Some industries like accommodation and television broadcasting are with little employment but large payroll + In contrast, some industries like agriculture, aircraft manufacturing and book stores are with relatively large emplyment but smaller payroll.<br><br> In terms of Moran’s theory about spatial autocorrelation, Moran’s I &gt; 0 represents positive spatial autocorrelated and Moran’s I &lt; 0 represents negative spatial autocorrelated. And when Moran’s I is close to zero, it represents value distributes spatial randomly.<br><br> As to value p, the treshold value is normally set as 0.05, if p is greater than threshold, the larger the value, the more evidence that the so-called null hypothesis can be approved, which indicates the value is randomly distributed.<br><br> In our case, MI= -0.1331731 is near to 0 and p=0.8939 is much larger than 0.05, so that we cannot reject the null hypothesis. It is quite possible that the spatial distribution of the scale of information industry is the result of random spatial processes.</p>
+<p>Analysze the results above, it is obviously that:<br><br> 1. Number of firms: <br> + California, Texas, New York, Florida are on the top 4 on the rank of number of firms<br><br> 2. Payroll and Employment: <br> + California, Texas, New York, Florida are also the top 4 of the rank of both payroll and employment<br><br> 3. Relationship between Payroll and Employment: No direct relationship<br><br> 4. Industries in New York State: <br> + Most industries are on the same level developed <br> + Some industries like accommodation and television broadcasting are with little employment but large payroll <br> + In contrast, some industries like agriculture, aircraft manufacturing and book stores are with relatively large emplyment but smaller payroll.<br><br> In terms of Moran’s theory about spatial autocorrelation, Moran’s I &gt; 0 represents positive spatial autocorrelated and Moran’s I &lt; 0 represents negative spatial autocorrelated. And when Moran’s I is close to zero, it represents value distributes spatial randomly.<br><br> As to value p, the treshold value is normally set as 0.05, if p is greater than threshold, the larger the value, the more evidence that the so-called null hypothesis can be approved, which indicates the value is randomly distributed.<br><br> In our case, MI= -0.1331731 is near to 0 and p=0.8939 is much larger than 0.05, so that we cannot reject the null hypothesis. It is quite possible that the spatial distribution of the scale of information industry is the result of random spatial processes.</p>
 </div>
 <div id="references" class="section level1">
 <h1>References</h1>
